@@ -25,10 +25,12 @@ def generar_portadora(t, fc, Ac):
     return Ac * np.sin(2 * np.pi * fc * t)
 
 # Funciones de modulación
+
 def modulacion_AM(t, fc, fm, Ac, Am, mu):
     portadora = generar_portadora(t, fc, Ac)
     moduladora = generar_moduladora_analogica(t, fm, Am)
-    modulada = Ac * (1 + mu * (moduladora/Am)) * np.sin(2 * np.pi * fc * t)
+    # Fórmula directa sin normalización explícita
+    modulada = (Ac + mu * moduladora) * np.sin(2 * np.pi * fc * t)
     return modulada, portadora, moduladora
 
 def modulacion_FM(t, fc, fm, Ac, Am, kf):
