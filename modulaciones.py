@@ -193,9 +193,15 @@ elif seleccion == "FM":
     **Modulación de Frecuencia (FM):**
     
     **Ecuaciones:**
-    - Portadora: $c(t) = {Ac:.1f} \cdot \sin(2\pi \cdot {fc:.1f} \cdot t)$
-    - Moduladora: $m(t) = {Am:.1f} \cdot \sin(2\pi \cdot {fm:.1f} \cdot t)$
-    - Modulada: $s(t) = {Ac:.1f} \cdot \sin\left(2\pi \cdot {fc:.1f} \cdot t + 2\pi \cdot {kf:.1f} \cdot \int m(t) dt\right)$
+    
+    - **Portadora:** 
+      $$c(t) = {Ac:.1f} \cdot \sin(2\pi \cdot {fc:.1f} \cdot t)$$
+    
+    - **Moduladora:** 
+      $$m(t) = {Am:.1f} \cdot \sin(2\pi \cdot {fm:.1f} \cdot t)$$
+    
+    - **Modulada:** 
+      $$s(t) = {Ac:.1f} \cdot \sin\left(2\pi \cdot {fc:.1f} \cdot t + 2\pi \cdot {kf:.1f} \cdot \int m(t) \, dt\right)$$
     
     **Explicación:**
     - La frecuencia instantánea varía según la señal moduladora.
