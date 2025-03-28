@@ -191,24 +191,24 @@ if seleccion == "AM":
 elif seleccion == "FM":
     st.markdown(f"""
     **Modulación de Frecuencia (FM):**
-    
+
     **Ecuaciones:**
-    
-    - **Portadora:** 
-      $$c(t) = {Ac:.1f} \cdot \sin(2\pi \cdot {fc:.1f} \cdot t)$$
-    
-    - **Moduladora:** 
-      $$m(t) = {Am:.1f} \cdot \sin(2\pi \cdot {fm:.1f} \cdot t)$$
-    
-    - **Modulada:** 
-      $$s(t) = {Ac:.1f} \cdot \sin\left(2\pi \cdot {fc:.1f} \cdot t + 2\pi \cdot {kf:.1f} \cdot \int m(t) \, dt\right)$$
-    
+
+    - **Portadora:**  
+      $c(t) = {Ac:.1f} \cdot \sin(2\pi \cdot {fc:.1f} \cdot t)$
+
+    - **Moduladora:**  
+      $m(t) = {Am:.1f} \cdot \sin(2\pi \cdot {fm:.1f} \cdot t)$
+
+    - **Modulada:**  
+      $s(t) = {Ac:.1f} \cdot \sin\left(2\pi \cdot {fc:.1f} \cdot t + 2\pi \cdot {kf:.1f} \cdot \int m(t) dt\right)$
+
     **Explicación:**
     - La frecuencia instantánea varía según la señal moduladora.
     - Desviación de frecuencia: Δf = kf × Am = {kf*Am:.1f} Hz
     - Índice de modulación: β = Δf/fm = {(kf*Am)/fm:.2f}
     - Ancho de banda (Carson): 2 × (Δf + fm) = {2*(kf*Am + fm):.1f} Hz
-    """)
+    """, unsafe_allow_html=True)
 elif seleccion == "PM":
     st.markdown(f"""
     **Modulación de Fase (PM):**
