@@ -175,41 +175,88 @@ st.markdown("---")
 st.subheader("🎓 Explicación Teórica")
 
 if seleccion == "AM":
-    st.markdown("""
+    st.markdown(f"""
     **Modulación de Amplitud (AM):**
+    
+    **Ecuaciones:**
+    - Portadora: $c(t) = {Ac:.1f} \cdot \sin(2\pi \cdot {fc:.1f} \cdot t)$
+    - Moduladora: $m(t) = {Am:.1f} \cdot \sin(2\pi \cdot {fm:.1f} \cdot t)$
+    - Modulada: $s(t) = [{Ac:.1f} + {mu:.1f} \cdot m(t)] \cdot \sin(2\pi \cdot {fc:.1f} \cdot t)$
+    
+    **Explicación:**
     - La amplitud de la portadora varía según la señal moduladora.
-    - Ecuación: $s(t) = A_c[1 + μ·m(t)]·\sin(2πf_ct)$
-    - μ debe ser ≤ 1 para evitar distorsión.
+    - μ debe ser ≤ 1 para evitar distorsión (en este caso μ = {mu:.1f}).
+    - Ancho de banda: 2 × fm = {2*fm:.1f} Hz
     """)
 elif seleccion == "FM":
-    st.markdown("""
+    st.markdown(f"""
     **Modulación de Frecuencia (FM):**
+    
+    **Ecuaciones:**
+    - Portadora: $c(t) = {Ac:.1f} \cdot \sin(2\pi \cdot {fc:.1f} \cdot t)$
+    - Moduladora: $m(t) = {Am:.1f} \cdot \sin(2\pi \cdot {fm:.1f} \cdot t)$
+    - Modulada: $s(t) = {Ac:.1f} \cdot \sin\left(2\pi \cdot {fc:.1f} \cdot t + 2\pi \cdot {kf:.1f} \cdot \int m(t) dt\right)$
+    
+    **Explicación:**
     - La frecuencia instantánea varía según la señal moduladora.
-    - Ecuación: $s(t) = A_c·\sin(2πf_ct + 2πk_f∫m(t)dt)$
-    - Mayor kf → mayor desviación de frecuencia.
+    - Desviación de frecuencia: Δf = kf × Am = {kf*Am:.1f} Hz
+    - Índice de modulación: β = Δf/fm = {(kf*Am)/fm:.2f}
+    - Ancho de banda (Carson): 2 × (Δf + fm) = {2*(kf*Am + fm):.1f} Hz
     """)
 elif seleccion == "PM":
-    st.markdown("""
+    st.markdown(f"""
     **Modulación de Fase (PM):**
+    
+    **Ecuaciones:**
+    - Portadora: $c(t) = {Ac:.1f} \cdot \sin(2\pi \cdot {fc:.1f} \cdot t)$
+    - Moduladora: $m(t) = {Am:.1f} \cdot \sin(2\pi \cdot {fm:.1f} \cdot t)$
+    - Modulada: $s(t) = {Ac:.1f} \cdot \sin(2\pi \cdot {fc:.1f} \cdot t + {kp:.1f} \cdot m(t))$
+    
+    **Explicación:**
     - La fase instantánea varía según la señal moduladora.
-    - Ecuación: $s(t) = A_c·\sin(2πf_ct + k_p·m(t))$
+    - Desviación de fase máxima: kp × Am = {kp*Am:.2f} radianes
     - Similar a FM pero proporcional a m(t) en lugar de su integral.
     """)
 elif seleccion == "ASK":
-    st.markdown("""
+    st.markdown(f"""
     **Modulación por Desplazamiento de Amplitud (ASK):**
+    
+    **Ecuaciones:**
+    - Portadora: $c(t) = {Ac:.1f} \cdot \sin(2\pi \cdot {fc:.1f} \cdot t)$
+    - Señal digital: $d(t)$ (binario: {binario})
+    - Modulada: $s(t) = d(t) \cdot c(t)$
+    
+    **Explicación:**
     - La amplitud de la portadora cambia según los bits (1 = presencia, 0 = ausencia).
     - Simple pero sensible al ruido.
+    - Tasa de bits: {len(binario)/t_duracion:.2f} bps
     """)
 elif seleccion == "PSK":
-    st.markdown("""
+    st.markdown(f"""
     **Modulación por Desplazamiento de Fase (PSK):**
+    
+    **Ecuaciones:**
+    - Portadora: $c(t) = {Ac:.1f} \cdot \sin(2\pi \cdot {fc:.1f} \cdot t)$
+    - Señal digital: $d(t)$ (binario: {binario})
+    - Modulada: $s(t) = {Ac:.1f} \cdot \cos(2\pi \cdot {fc:.1f} \cdot t + \pi \cdot d(t))$
+    
+    **Explicación:**
     - La fase de la portadora cambia según los bits (ej: 0° para 0, 180° para 1).
     - Más eficiente que ASK en ancho de banda.
+    - Tasa de bits: {len(binario)/t_duracion:.2f} bps
     """)
 elif seleccion == "FSK":
-    st.markdown("""
+    st.markdown(f"""
     **Modulación por Desplazamiento de Frecuencia (FSK):**
+    
+    **Ecuaciones:**
+    - Portadora: $c(t) = {Ac:.1f} \cdot \sin(2\pi \cdot {fc:.1f} \cdot t)$
+    - Señal digital: $d(t)$ (binario: {binario})
+    - Frecuencias: f1 = {fc-delta_f/2:.1f} Hz (para 0), f2 = {fc+delta_f/2:.1f} Hz (para 1)
+    - Modulada: $s(t) = {Ac:.1f} \cdot \sin(2\pi \cdot (f1 + (f2 - f1) \cdot d(t)) \cdot t)$
+    
+    **Explicación:**
     - La frecuencia de la portadora cambia según los bits.
     - Más robusta al ruido que ASK pero requiere más ancho de banda.
+    - Tasa de bits: {len(binario)/t_duracion:.2f} bps
     """)
